@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="{{ url_for('static',filename= 'imgs/favicon.png')}}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Monoton&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <title>Big Mart</title>
+    <style>
+        *{
+            font-family: 'Montserrat', sans-serif;
+        }
+        body
+        {
+            /* overflow: hidden; */
+            background-image: linear-gradient(90deg, rgb(243, 114, 209) 0%,rgb(44, 19, 241) 100%);
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            background-color:#af00ff;
+        }
+        h1
+        {
+            width: 80%;
+            margin: auto;
+            margin-top: 10px;
+            font-size: 75px;
+            color: white;
+            font-family: cursive;
+            text-align: center;
+            background: rgba( 255, 255, 255, 0.25 );
+            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+            border-radius: 10px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        #login
+        {
+            /* text-align: center; */
+            display: inline-block;
+            width: 40%;
+            height: 330px;
+            background: rgba( 255, 255, 255, 0.25 );
+            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+            border-radius: 10px;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+        }
+        #signup
+        {
+            display: inline-block;
+            width: 40%;
+            height: 330px;
+            /* text-align: center; */
+            background: rgba( 255, 255, 255, 0.25 );
+            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+            border-radius: 10px;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+        }
+        #main
+        {
+            margin-top: 2%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #line
+        {
+            width: 3%;
+        }
+        h2
+        {
+            margin-bottom: 0px;
+        }
+
+        .sub_button{
+            background-color: rgb(243, 114, 209);
+            border: 0px;
+            border: 1px solid white;
+            border-radius: 20px;
+            font-size: large;
+            color: white;
+            margin-top: 30px;
+        }
+        input[type=text], input[type=password]
+        {
+            background: rgba( 255, 255, 255, 0.25 );
+            border: 0;
+            border: 1px solid white;
+            color: rgb(44, 19, 241);
+        }
+
+        input[type=text]:focus , input[type=password]:focus
+        {
+            background: white;
+            outline: none;
+        }
+
+        input[type=submit]:focus
+        {
+            border: 0;
+            outline: 0;
+        }
+        a,h4
+        {
+            text-decoration: none;
+            color: white;
+            text-align: center;
+        }
+        #message
+        {
+            color: white;
+            text-align: center;
+            margin: 1% auto 0% auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Big Mart Sales Analytics</h1>
+    {% if data['register'] %}
+    <h3 id="message">Successfully registered</h3>
+    {% else %}
+    <h3 id="message"> &nbsp;</h3>
+    {% endif %}
+    <div id="main">
+        <div id="login">
+            <h2 style="text-decoration:underline; text-align: center;">Login Here</h2>
+            <form style="margin-left: 30px;" method="POST">
+                <h2>User Name</h2>
+                <input class="text_box" name="user_name" type="text" required>
+                <h2>Password</h2>
+                <input class="text_box" name="password" type="password" required>
+                <br>
+                <input style="margin: auto; display: block; margin-top: 7%;" name="sub_button" class="sub_button" type="submit" value="Resume the Party" required>
+                {% if not data['isOk'] %}
+                <h3 style="text-align: center;">Wrong password or Username! Try again</h3>
+                {% endif %}
+            </form>
+        </div>
+        <div id="line"></div>
+        <div id="signup">
+            <h2 style="text-decoration:underline; text-align: center;">Signup Here</h2>
+            <form style="margin-left: 30px;" method="POST"> 
+                <h2>Email Address</h2>
+                <input class="text_box" type="text" name="email" required>
+                <h2>User Name</h2>
+                <input class="text_box" type="text" name="user_name" required>
+                <h2>Create Password</h2>
+                <input class="text_box" type="password" name="password" required>
+                <br>
+                <input style="margin: auto; display: block; margin-top: 6%;" class="sub_button" name="sub_button" type="submit" value="Join the Party">
+            </form>
+        </div>
+    </div>
+    <br>
+    <h4>Don't want to give your details?</h4>
+    <a href="predict/guest"><h4 style="font-size: 20px;">Click here to Continue as Guest</h4></a>
+</body>
+</html>

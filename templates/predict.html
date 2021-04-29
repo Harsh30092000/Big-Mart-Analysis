@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static',filename= 'imgs/favicon.png')}}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Monoton&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict</title>
+    <style>
+        *{
+            font-family: 'Montserrat', sans-serif;
+        }
+        body
+        {
+            background-image: linear-gradient(90deg, rgb(243, 114, 209) 0%,rgb(44, 19, 241) 100%);
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            background-color:#af00ff;
+        }
+        #main
+        {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #predict_input
+        {
+            /* text-align: center; */
+            display: inline-block;
+            width: 45%;
+            height: 80vh;
+            margin-top: 2%;
+            margin-left: 2.5%;
+            margin-right: 2.5%;
+            background: rgba( 255, 255, 255, 0.25 );
+            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+            border-radius: 10px;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+        }
+        #predict_output
+        {
+            display: inline-block;
+            width: 45%;
+            height: 80vh;
+            /* text-align: center; */
+            margin-top: 2%;
+            margin-left: 0.2%;
+            margin-right: 2.5%;
+            background: rgba( 255, 255, 255, 0.25 );
+            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+            border-radius: 10px;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+        }
+        #my_new
+        {
+            text-align: center;
+            text-decoration: underline;
+        }
+        #products{
+            display: flex;
+        }
+        #items_one{
+            width: 45%;
+            margin-left: 5%;
+        }   
+        input[type=radio]{
+            margin-bottom: 20px;
+        }
+        input[type=number]
+        {
+            width: 150px;
+            margin-left: 5%;
+            background: rgba( 255, 255, 255, 0.25 );
+            color: white;
+            border: 0;
+            border: 1px solid white;
+        }
+        input[type=number]:focus
+        {
+            color: rgb(243, 151, 219);
+            outline: none;
+            background: white;
+        }
+        input[type=submit]
+        {
+            margin-left: 50%;
+            margin-top: 50px;
+            transform: translate(-50%,-50%);
+            color: white;
+            background: rgb(243, 151, 219); 
+            border: 0;
+            border: 1px solid white;
+        }
+        input[type=submit]:focus
+        {
+            border: 0;
+            outline: none;
+        }
+        img
+        {
+            width: 100%;
+        }
+
+        #ml_text{
+            margin-top: 11%;
+            margin-left: 3%;
+        }
+        </style>
+</head>
+<body>
+    <div id="main">
+        <div id="predict_input">
+            <h1 id="my_new">Select Here</h1>
+            <h3 style="margin: 1% 0% 2% 2%;">>> What type of Product do you want to examine?</h3>
+            <form method="POST">
+                <div id="products">
+                    <div id="items_one">
+                        <input type="radio" checked="checked" name="product" value="Dairy">Dairy<br>
+                        <input type="radio"  name="product" value="Soft Drink">Soft Drink<br>
+                        <input type="radio"  name="product" value="Fruits and Vegetables">Fruits and Vegetables<br>
+                        <input type="radio"  name="product" value="Household">Household<br>                        
+                    </div>
+                    <div id="items_two">
+                        <input type="radio" name="product" value="Frozen Foods">Frozen Foods<br>
+                        <input type="radio" name="product" value="Health and Hygiene">Health and Hygiene<br>
+                        <input type="radio"  name="product" value="Snack Foods">Snack Foods<br>
+                    </div>
+                </div>
+                <h3 style="margin: 1% 0% 2% 2%;">>> Can you type the MRP of the product below</h3>
+                <input type="number" min="1" max="2000" placeholder="ex:75" name="mrp" required>
+                <h3 style="margin: 3% 0% 2% 2%;">>> When?? Which Year?</h3>
+                <input type="number" min="2021" placeholder="ex:2023" name="date" required>
+                <br>
+                <input type="submit" value="See the Future">
+            </form>
+        </div>
+        <div id="predict_output">
+            <h1 id="my_new">See Here</h1>
+            <h1 id="my_new" style="font-size: 35px; text-decoration: none;">Select something to see the prediction....</h1>
+            {% if data['predict'] %}
+            <h2 id="ml_text">The ML model says:</h2>
+            <h2 id="ml_text" style="margin: 3% 5% auto 5%;"><span style="font-size: 40px;">"</span> I guess an {{data['product']}} with an MRP of {{data['mrp']}} 
+                 will have an outlet sale of {{data['predicted_valu']}} in the year {{data['date']}} . <span style="font-size: 40px;">"</span></h2>
+            {% endif %}
+        </div>
+    </div>
+    <a href="/" style="text-align: center; text-decoration: none;"><h1 style="color: white;">Click here to go back</h1></a>
+</body>
+</html>
